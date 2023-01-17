@@ -1,0 +1,694 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700;800;900&display=swap');
+
+:root {
+    --scissors-gradient: linear-gradient(to bottom, hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+    --paper-gradient: linear-gradient(to bottom, hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+    --rock-gradient: linear-gradient(to bottom, hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+    --lizard-gradient: linear-gradient(to bottom, hsl(261, 73%, 60%), hsl(261, 72%, 63%));
+    --cyan-gradient: linear-gradient(to bottom, hsl(189, 59%, 53%), hsl(189, 58%, 57%));
+    --radial-gradient: linear-gradient(to bottom, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+    --dark-text: hsl(229, 25%, 31%);
+    --score-text: hsl(229, 64%, 46%);
+    --header-outline: hsl(217, 16%, 45%);
+}
+
+* {
+    font-family: 'Barlow';
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all 500ms;
+}
+
+html{
+    max-width: 5000px;
+    max-height: 5000px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: var(--radial-gradient);
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal .content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal .content .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.modal .content .modal-header .modal-title {
+    font-weight: 800;
+    font-size: 24px;
+    text-transform: uppercase;
+    transform: scaleY(1.2);
+    color: var(--dark-text);
+}
+
+.modal .content .modal-header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.modal .content .modal-header button img {
+    vertical-align: middle;
+}
+
+.modal .content .modal-body {
+    display: flex;
+    padding: 0 1.5rem;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.modal .content .modal-body .modal-img {
+    width: 250px;
+    height: auto;
+}
+
+.container {
+    width: 1200px;
+    padding: 2rem 12px 0 12px;
+    margin: 0 auto;
+}
+
+.heading {
+    width: 100%;
+}
+
+.heading .container .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 5px solid var(--header-outline);
+    border-radius: 10px;
+}
+
+.heading .container .content .score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 0.5rem 2.5rem;
+}
+
+.heading .container .content .score span {
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 18px;
+    transform: scaleY(1.3);
+    color: var(--score-text);
+}
+
+.heading .container .content .score #score-number {
+    font-weight: 800;
+    color: var(--dark-text);
+    margin-bottom: 0;
+    font-size: 52px;
+}
+
+.main {
+    width: 100%;
+    /* height: calc(100vh - 224px); */
+}
+
+.main .container {
+    padding-top: 0;
+}
+
+.main .container .content {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background: url('images/bg-triangle.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.main .container .content .options {
+    display: none;
+    flex-flow: column;
+    height: 450px;
+}
+
+.main .container .content .options.show {
+    display: flex;
+}
+
+.main .container .content .options .first-two-options {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 3rem;
+}
+
+.main .container .content .options .last-option {
+    display: flex;
+    justify-content: center;
+}
+
+.main .container .content .options .option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.main .container .content .options #paper {
+    transform: translate(5rem, 1rem);
+    background: var(--paper-gradient);
+    box-shadow: 0 10px 1px 0px hsl(230, 89%, 57%);
+}
+
+.main .container .content .options #scissors {
+    transform: translate(-5rem, 1rem);
+    background: var(--scissors-gradient);
+    box-shadow: 0 10px 1px 0px hsl(39, 89%, 44%);
+}
+
+.main .container .content .options #rock {
+    background: var(--rock-gradient);
+    box-shadow: 0 10px 1px 0px hsl(349, 71%, 47%);
+}
+
+.main .content .options .option .option-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: inset 0 10px 1px 0px hsl(217, 16%, 85%);
+}
+
+.main .content .options .option .option-img img {
+    width: 45%;
+    height: auto;
+}
+
+.main .container .content .result {
+    display: none;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.main .container .content .result.show {
+    display: flex;
+}
+
+.main .container .content .result .option {
+    display: flex;
+    flex-direction: column;
+}
+
+.main .container .content .result .option h4 {
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    word-spacing: 4px;
+}
+
+.main .content .result .option .option-inner {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.main .content .result .win .option-inner::after,
+.main .content .result .win .option-inner::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.main .content .result .win .option-inner::after {
+    animation: win-animation-one 0.6s linear 0s infinite normal forwards;
+}
+
+.main .content .result .win .option-inner::before {
+    animation: win-animation-one 0.6s linear 0.2s infinite normal forwards;
+}
+
+.main .content .result .win .option-inner .animation-circle {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: win-animation-one 0.6s linear 0.4s infinite normal forwards;
+}
+
+@keyframes win-animation-one {
+    from {
+        width: 300px;
+        height: 300px;
+        background-color: hsla(217, 16%, 45%, 0.241);
+    }
+
+    to {
+        width: 500px;
+        height: 500px;
+        background-color: hsla(217, 16%, 45%, 0.051);
+    }
+}
+
+.main .content .result .option .option-inner[data-option=paper] {
+
+    background: var(--paper-gradient);
+    box-shadow: 0 10px 1px 0px hsl(230, 89%, 57%);
+}
+
+.main .content .result .option .option-inner[data-option=scissors] {
+    background: var(--scissors-gradient);
+    box-shadow: 0 10px 1px 0px hsl(39, 89%, 44%);
+}
+
+.main .content .result .option .option-inner[data-option=rock] {
+    background: var(--rock-gradient);
+    box-shadow: 0 10px 1px 0px hsl(349, 71%, 47%);
+}
+
+.main .content .result .option .option-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: inset 0 10px 1px 0px hsl(217, 16%, 85%);
+}
+
+.main .content .result .option .option-img img {
+    width: 45%;
+    height: auto;
+}
+
+.main .container .content .result .result-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+}
+
+.main .container .content .result .result-text h3 {
+    color: #fff;
+    text-align: center;
+    font-size: 42px;
+    text-transform: uppercase;
+    transform: scaleY(1.2);
+    margin-bottom: 1rem;
+}
+
+.main .container .content .result .result-text #play-again {
+    width: 75%;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #fff;
+    color: var(--dark-text);
+    padding: 0.75rem 3rem;
+    border-radius: 10px;
+    border: none;
+}
+
+.main .container .content .result .result-text #play-again:hover {
+    transition: color 100ms;
+    cursor: pointer;
+    color: hsl(349, 71%, 52%);
+}
+
+.main .container .content .show-rules {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.main .container .content .show-rules button {
+    text-transform: uppercase;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 0.5rem 2rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.main .container .content .show-rules button:hover {
+    color: var(--dark-text);
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 1200px) {
+    .container {
+        width: 962px;
+    }
+
+    .main .container .content .options #paper {
+        transform: translate(3rem, 1rem);
+    }
+
+    .main .container .content .options #scissors {
+        transform: translate(-3rem, 1rem);
+    }
+
+    .main .container .content .result .result-text #play-again {
+        padding: 0.75rem 2rem;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .container {
+        width: 738px;
+    }
+
+    .main .container .content .options #paper {
+        transform: translate(1rem, 1rem);
+    }
+
+    .main .container .content .options #scissors {
+        transform: translate(-1rem, 1rem);
+    }
+
+    .main .container .content .result {
+        justify-content: space-between;
+    }
+
+    .main .content .result .option .option-inner {
+        width: 250px;
+        height: 250px;
+    }
+
+    .main .container .content .result .result-text #play-again {
+        width: 100%;
+    }
+
+    @keyframes win-animation-one {
+        from {
+            width: 250px;
+            height: 250px;
+            background-color: hsla(217, 16%, 45%, 0.241);
+        }
+
+        to {
+            width: 450px;
+            height: 450px;
+            background-color: hsla(217, 16%, 45%, 0.051);
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .modal .content .modal-body .modal-img {
+        width: 200px;
+        height: auto;
+    }
+
+    .modal .content .modal-header .modal-title {
+        font-size: 18px;
+    }
+
+    .container {
+        width: 545px;
+    }
+
+    .main .container .content .options .option {
+        width: 175px;
+        height: 175px;
+    }
+
+    .main .content .options .option .option-img {
+        width: 135px;
+        height: 135px;
+    }
+
+    .main .container .content .options #paper {
+        transform: translate(-1rem, 1rem);
+    }
+
+    .main .container .content .options #scissors {
+        transform: translate(1rem, 1rem);
+    }
+
+    .main .container .content .result .option {
+        flex-direction: column-reverse;
+    }
+
+    .main .container .content .result .option h4 {
+        margin-top: 2rem;
+    }
+
+    .main .content .result .option .option-inner {
+        width: 175px;
+        height: 175px;
+    }
+
+    .main .container .content .result .result-text #play-again {
+        width: 100%;
+        padding: 0.75rem;
+    }
+
+    .main .container .content .result .result-text h3 {
+        font-size: 36px;
+    }
+
+    @keyframes win-animation-one {
+        from {
+            width: 175px;
+            height: 175px;
+            background-color: hsla(217, 16%, 45%, 0.241);
+        }
+
+        to {
+            width: 375px;
+            height: 375px;
+            background-color: hsla(217, 16%, 45%, 0.051);
+        }
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .container {
+        width: 95%;
+    }
+
+    .main .container .content .options .option {
+        width: 150px;
+        height: 150px;
+    }
+
+    .main .content .options .option .option-img {
+        width: 115px;
+        height: 115px;
+        box-shadow: inset 0 7px 1px 0px hsl(217deg 16% 85%);
+    }
+
+    .main .container .content .options #paper {
+        transform: translate(0rem, 3rem);
+        box-shadow: 0 7px 1px 0px hsl(230deg 89% 57%);
+    }
+
+    .main .container .content .options #scissors {
+        transform: translate(0rem, 3rem);
+        box-shadow: 0 7px 1px 0px hsl(39, 89%, 44%);
+    }
+
+    .main .container .content .options #rock {
+        transform: translateY(2rem);
+        box-shadow: 0 7px 1px 0px hsl(349, 71%, 47%);
+    }
+
+    .main .container .content .result .result-text #play-again {
+        width: 40%;
+    }
+
+    .main .container .content .result {
+        flex-wrap: wrap;
+    }
+
+    .main .container .content .result .option {
+        order: 1;
+        flex-direction: column-reverse;
+    }
+
+    .main .container .content .result .result-text {
+        width: 100%;
+        margin-top: 3rem;
+        order: 2;
+    }
+
+    .main .container .content .show-rules {
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+
+    .modal .content {
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal .content .modal-header .modal-title {
+        font-size: 24px;
+    }
+
+    .modal .content .modal-body .modal-img {
+        width: 250px;
+        height: auto;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .heading .container .content {
+        padding: 1rem;
+        align-items: center;
+    }
+
+    .heading .container .content .logo img {
+        width: 125px;
+        height: auto;
+    }
+
+    .heading .container .content .score {
+        padding: 0.5rem 1.5rem;
+    }
+
+    .main .container .content .options .option {
+        width: 120px;
+        height: 120px;
+    }
+
+    .main .content .options .option .option-img {
+        width: 90px;
+        height: 90px;
+        box-shadow: inset 0 5px 1px 0px hsl(217deg 16% 85%);
+    }
+
+    .main .container .content .options #paper {
+        transform: translate(-1rem, 3rem);
+        box-shadow: 0 5px 1px 0px hsl(230deg 89% 57%);
+    }
+
+    .main .container .content .options #scissors {
+        transform: translate(1rem, 3rem);
+        box-shadow: 0 5px 1px 0px hsl(39, 89%, 44%);
+    }
+
+    .main .container .content .options #rock {
+        transform: translateY(4rem);
+        box-shadow: 0 5px 1px 0px hsl(349, 71%, 47%);
+    }
+
+    .main .container .content .options .option {
+        width: 140px;
+        height: 140px;
+    }
+
+    .main .content .options .option .option-img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .main .container .content .result .option {
+        align-items: center;
+    }
+
+    .main .content .result .option .option-inner {
+        width: 140px;
+        height: 140px;
+    }
+
+    .main .content .result .option .option-img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .main .container .content .result .option h4 {
+        font-size: 18px;
+    }
+
+    .main .container .content .result .result-text #play-again {
+        width: 50%;
+        padding: 0.75rem 2rem;
+    }
+
+    .main .container .content .result .result-text h3 {
+        font-size: 42px;
+    }
+
+
+    @keyframes win-animation-one {
+        from {
+            width: 140px;
+            height: 140px;
+            background-color: hsla(217, 16%, 45%, 0.241);
+        }
+
+        to {
+            width: 340px;
+            height: 340px;
+            background-color: hsla(217, 16%, 45%, 0.051);
+        }
+    }
+}
