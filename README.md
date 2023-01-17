@@ -1,5 +1,5 @@
 # Rock-Paper-Scissors
-This game developed by html5, css3, javascript
+This game developed by html, css, javascript
 
 Thank you for chcking out this game
 
