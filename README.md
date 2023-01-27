@@ -1,11 +1,12 @@
-# Rock-Paper-Scissors
-This game developed by html, css, javascript
+# Project 1
 
-Thank you for chcking out this game
+Thanks for checking out this project. I hope you guys enjoy it and if you have any suggestion then comment it or send pull request
 
-I hope you guys enjoy it
+Used languages and frameworks : Html, Css, Js
 
-By the way i developed this game by udemy javascript course helping. I recommend if you are new in js or don't have good course yet, then go to udemy website and buy
-jonas javascript zero to expert course and enjoy watching.
+Project Name : Rock Paper Scissors
 
-love you
+Project Description: this game is simply like classic rock paper scissors game and you can play it with robot . also your score will be save even you close
+the tab and quite browser . it is responsive and i coded some animations that makes app better.
+
+if you guys want to train this project then you can go to frontendmentor.com and visit this project there .
